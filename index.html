@@ -151,29 +151,6 @@ h1.headline .accent{background:linear-gradient(100deg, var(--steel-1), var(--blu
 .device-tabs button{border:none; background:transparent; color:var(--muted); font-size:12.5px; letter-spacing:.05em; padding:9px 18px; border-radius:100px; cursor:pointer; transition:all .3s;}
 .device-tabs button.active{background:var(--blue); color:#fff;}
 
-/* ---------- paint bench ---------- */
-.bench{padding:0 6vw 140px; display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center;}
-@media(max-width:900px){.bench{grid-template-columns:1fr;}}
-.stage{position:relative; height:480px; border-radius:20px; border:1px solid var(--line); background:radial-gradient(ellipse at 50% 30%, #1a1e22, #0d0f11 75%); display:flex; align-items:center; justify-content:center; overflow:hidden;}
-.stage::before{content:""; position:absolute; inset:0; background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size:34px 34px; opacity:.25; mask-image:radial-gradient(circle at 50% 40%, #000 20%, transparent 72%);}
-.controller-svg{width:78%; max-width:360px; filter:drop-shadow(0 30px 46px rgba(0,0,0,.55));}
-#shellPath{transition:fill 1s cubic-bezier(.16,1,.3,1);}
-#ledBar{transition:fill 1s cubic-bezier(.16,1,.3,1); filter:drop-shadow(0 0 6px var(--blue-glow)); animation:pulse 2.4s ease-in-out infinite;}
-#ringL, #ringR{transition:stroke 1s cubic-bezier(.16,1,.3,1);}
-.spark{position:absolute; width:5px; height:5px; border-radius:50%; pointer-events:none; z-index:6; opacity:0;}
-.spark.go{animation:sparkfly .7s ease-out forwards;}
-@keyframes sparkfly{0%{opacity:1; transform:translate(0,0) scale(1);} 100%{opacity:0; transform:translate(var(--tx), var(--ty)) scale(.2);}}
-.stage-label{position:absolute; top:20px; left:24px; font-size:11px; letter-spacing:.15em; color:var(--muted);}
-.stage-code{position:absolute; bottom:20px; left:24px; font-size:12px; color:var(--steel-1);}
-.stage-code b{color:var(--text); font-weight:500;}
-.bench-copy .sec-tag{margin-bottom:14px;}
-.swatches{display:flex; flex-wrap:wrap; gap:14px; margin-top:34px;}
-.swatch{width:52px; height:52px; border-radius:12px; cursor:pointer; position:relative; border:2px solid transparent; transition:transform .3s, border-color .3s; box-shadow:inset 0 0 0 1px rgba(255,255,255,.15), inset 0 -6px 10px rgba(0,0,0,.35), inset 0 6px 8px rgba(255,255,255,.25);}
-.swatch:hover{transform:translateY(-4px);}
-.swatch.active{border-color:#fff;}
-.swatch span{position:absolute; bottom:-24px; left:50%; transform:translateX(-50%); white-space:nowrap; font-size:10.5px; color:var(--muted); letter-spacing:.05em;}
-.bench-note{margin-top:56px; padding-top:22px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; line-height:1.8;}
-
 /* ---------- process ---------- */
 .process{padding:0 6vw 140px;}
 .steps{display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--line); border-radius:16px; overflow:hidden; border:1px solid var(--line);}
@@ -368,126 +345,6 @@ footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
   <div class="scroll-cue"><div class="bar"></div> SCROLL</div>
 </section>
 
-<section id="bench" class="bench">
-  <div class="stage reveal">
-    <div class="stage-label mono">LIVE PREVIEW</div>
-    <div class="stage-code mono">PANTONE <b id="codeLabel">STEEL — 8400C</b></div>
-    <svg id="controllerSVG" viewBox="0 0 440 300" class="controller-svg">
-      <defs>
-        <linearGradient id="grad-steel" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#eef1f3"/>
-          <stop offset="28%" stop-color="#b9bfc4"/>
-          <stop offset="52%" stop-color="#7c8288"/>
-          <stop offset="76%" stop-color="#c4c9ce"/>
-          <stop offset="100%" stop-color="#9aa0a6"/>
-        </linearGradient>
-        <linearGradient id="grad-void" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#4a4d50"/>
-          <stop offset="28%" stop-color="#232527"/>
-          <stop offset="52%" stop-color="#0a0b0c"/>
-          <stop offset="76%" stop-color="#2f3134"/>
-          <stop offset="100%" stop-color="#16181a"/>
-        </linearGradient>
-        <linearGradient id="grad-volt" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#a9c4ff"/>
-          <stop offset="28%" stop-color="#3f7dfb"/>
-          <stop offset="52%" stop-color="#163f9e"/>
-          <stop offset="76%" stop-color="#6a97fc"/>
-          <stop offset="100%" stop-color="#274f8e"/>
-        </linearGradient>
-        <linearGradient id="grad-rose" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#f6ddc4"/>
-          <stop offset="28%" stop-color="#dba876"/>
-          <stop offset="52%" stop-color="#96633c"/>
-          <stop offset="76%" stop-color="#e6bd91"/>
-          <stop offset="100%" stop-color="#a9744a"/>
-        </linearGradient>
-        <linearGradient id="grad-race" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#f4a99b"/>
-          <stop offset="28%" stop-color="#d94f43"/>
-          <stop offset="52%" stop-color="#7a1f1a"/>
-          <stop offset="76%" stop-color="#e2685a"/>
-          <stop offset="100%" stop-color="#8f2921"/>
-        </linearGradient>
-        <linearGradient id="grad-aura" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#c3b0f6"/>
-          <stop offset="28%" stop-color="#7b5fd9"/>
-          <stop offset="52%" stop-color="#3a2769"/>
-          <stop offset="76%" stop-color="#9b82e8"/>
-          <stop offset="100%" stop-color="#4f3a8a"/>
-        </linearGradient>
-        <radialGradient id="grad-cap" cx="35%" cy="30%" r="75%">
-          <stop offset="0%" stop-color="#3a3d40"/>
-          <stop offset="70%" stop-color="#0c0d0e"/>
-        </radialGradient>
-        <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/>
-          <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/>
-          <feComposite operator="over" in2="SourceGraphic"/>
-        </filter>
-      </defs>
-
-      <path id="shellPath" d="M110 58
-        C 70 58 46 84 44 122
-        C 42 168 58 218 92 258
-        C 108 278 132 286 142 266
-        C 154 244 158 208 160 172
-        L 280 172
-        C 282 208 286 244 298 266
-        C 308 286 332 278 348 258
-        C 382 218 398 168 396 122
-        C 394 84 370 58 330 58
-        C 314 34 282 20 220 20
-        C 158 20 126 34 110 58 Z"
-        fill="url(#grad-steel)" filter="url(#grain)" />
-
-      <rect x="160" y="46" width="120" height="46" rx="10" fill="rgba(0,0,0,.18)"/>
-      <rect id="ledBar" x="178" y="52" width="84" height="5" rx="2.5" fill="#3f7dfb"/>
-      <g id="speakerDots" fill="rgba(255,255,255,.35)">
-        <circle cx="200" cy="66" r="2"/><circle cx="208" cy="66" r="2"/><circle cx="216" cy="66" r="2"/>
-        <circle cx="224" cy="66" r="2"/><circle cx="232" cy="66" r="2"/><circle cx="240" cy="66" r="2"/>
-      </g>
-
-      <g id="dpad" fill="rgba(0,0,0,.55)">
-        <rect x="95" y="98" width="16" height="46" rx="4"/>
-        <rect x="80" y="113" width="46" height="16" rx="4"/>
-      </g>
-
-      <g id="faceButtons" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="2.4">
-        <circle cx="345" cy="98" r="11"/>
-        <circle cx="322" cy="121" r="11"/>
-        <circle cx="368" cy="121" r="11"/>
-        <circle cx="345" cy="144" r="11"/>
-      </g>
-
-      <g id="stickL">
-        <circle cx="130" cy="150" r="27" fill="rgba(0,0,0,.28)"/>
-        <circle id="ringL" cx="130" cy="150" r="27" fill="none" stroke="#3f7dfb" stroke-width="3" opacity=".9"/>
-        <circle cx="130" cy="150" r="20" fill="url(#grad-cap)"/>
-      </g>
-      <g id="stickR">
-        <circle cx="270" cy="180" r="27" fill="rgba(0,0,0,.28)"/>
-        <circle id="ringR" cx="270" cy="180" r="27" fill="none" stroke="#3f7dfb" stroke-width="3" opacity=".9"/>
-        <circle cx="270" cy="180" r="20" fill="url(#grad-cap)"/>
-      </g>
-    </svg>
-  </div>
-  <div class="bench-copy reveal">
-    <div class="sec-tag">調色台 · LIVE PAINT BENCH</div>
-    <h2 class="sec-title">選一支色號，<br>看塗層即時上身。</h2>
-    <p class="sec-desc">點選下方色卡，搖桿外殼與金屬桿飾環會即時換上噴漆後的質感 —— 這正是到店後你會看到的實際效果，所見即所得。</p>
-    <div class="swatches" id="swatches">
-      <div class="swatch active" data-fill="url(#grad-steel)" data-accent="#9aa0a6" data-code="STEEL — 8400C" style="background:linear-gradient(160deg,#eef1f3,#9aa0a6)"><span>鈦金灰</span></div>
-      <div class="swatch" data-fill="url(#grad-void)" data-accent="#4b5157" data-code="VOID — 0100C" style="background:linear-gradient(160deg,#4a4d50,#16181a)"><span>深空黑</span></div>
-      <div class="swatch" data-fill="url(#grad-volt)" data-accent="#3f7dfb" data-code="VOLT — 2745C" style="background:linear-gradient(160deg,#a9c4ff,#163f9e)"><span>電光藍</span></div>
-      <div class="swatch" data-fill="url(#grad-rose)" data-accent="#c9967a" data-code="ROSE — 4675C" style="background:linear-gradient(160deg,#f6ddc4,#96633c)"><span>玫瑰金</span></div>
-      <div class="swatch" data-fill="url(#grad-race)" data-accent="#d94f43" data-code="RACE — 1795C" style="background:linear-gradient(160deg,#f4a99b,#7a1f1a)"><span>競速紅</span></div>
-      <div class="swatch" data-fill="url(#grad-aura)" data-accent="#7b5fd9" data-code="AURA — 2665C" style="background:linear-gradient(160deg,#c3b0f6,#3a2769)"><span>極光紫</span></div>
-    </div>
-    <div class="bench-note">＊實際色差依環境光源與螢幕校色略有不同，到店可對照真實色卡確認。完整 18 色請見<a href="gallery.html" style="color:var(--blue);">色彩選單</a>。</div>
-  </div>
-</section>
-
 <div class="sec-head reveal">
   <div class="sec-tag">工序 · THE PROCESS</div>
   <h2 class="sec-title">五道工序，<b>沒有一道省略。</b></h2>
@@ -655,47 +512,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: .12 });
     revealEls.forEach(el => io.observe(el));
   }
-
-  /* paint bench interactivity */
-  const shellPath = document.getElementById('shellPath');
-  const ledBar = document.getElementById('ledBar');
-  const ringL = document.getElementById('ringL');
-  const ringR = document.getElementById('ringR');
-  const codeLabel = document.getElementById('codeLabel');
-  const stage = document.querySelector('.stage');
-  const swatches = document.querySelectorAll('#swatches .swatch');
-
-  function burst() {
-    if (!stage) return;
-    const colors = ['#fff', '#cfd6dc', '#8a9096'];
-    for (let i = 0; i < 14; i++) {
-      const sp = document.createElement('div');
-      sp.className = 'spark';
-      const angle = Math.random() * Math.PI * 2;
-      const dist = 40 + Math.random() * 70;
-      sp.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
-      sp.style.setProperty('--ty', Math.sin(angle) * dist - 30 + 'px');
-      sp.style.left = '50%';
-      sp.style.top = '30%';
-      sp.style.background = colors[i % 3];
-      stage.appendChild(sp);
-      requestAnimationFrame(() => sp.classList.add('go'));
-      setTimeout(() => sp.remove(), 750);
-    }
-  }
-
-  swatches.forEach(sw => {
-    sw.addEventListener('click', () => {
-      swatches.forEach(s => s.classList.remove('active'));
-      sw.classList.add('active');
-      if (shellPath) shellPath.setAttribute('fill', sw.dataset.fill);
-      if (ledBar) ledBar.setAttribute('fill', sw.dataset.accent);
-      if (ringL) ringL.setAttribute('stroke', sw.dataset.accent);
-      if (ringR) ringR.setAttribute('stroke', sw.dataset.accent);
-      if (codeLabel) codeLabel.textContent = sw.dataset.code;
-      burst();
-    });
-  });
 
   /* 3D tilt on gallery / price cards */
   document.querySelectorAll('[data-tilt]').forEach(card => {
