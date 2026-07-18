@@ -305,7 +305,7 @@ h1.headline .accent{background:linear-gradient(100deg, var(--steel-1), var(--blu
 .final .hero-actions{justify-content:center; margin-top:36px;}
 
 footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
-.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:30px; padding-bottom:30px;}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:30px; padding-bottom:30px;}
 @media(max-width:800px){.foot-grid{grid-template-columns:1fr 1fr;}}
 .foot-grid h5{font-size:11.5px; letter-spacing:.1em; color:var(--muted); margin-bottom:16px;}
 .foot-grid a, .foot-grid p{display:block; font-size:13px; color:var(--muted); text-decoration:none; margin-bottom:10px; line-height:1.6;}
@@ -368,8 +368,8 @@ footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
 
 <section class="faq reveal">
   <div class="faq-item">
-    <button class="faq-q">噴漆後手把還有保固嗎？<span class="plus en">+</span></button>
-    <div class="faq-a"><p>噴漆本身提供 6 個月掉漆／褪色保固，但拆機改色會視同拆封，原廠保固將由我們的工作室保固取代；若手把在改色前已過原廠保固，不受影響。</p></div>
+    <button class="faq-q">改色後日常使用需要注意什麼？<span class="plus en">+</span></button>
+    <div class="faq-a"><p>建議避免長時間放置在高溫或潮濕環境，金屬桿部位盡量減少與粗糙表面摩擦；若使用一段時間後想重新上色或修補，都可以再送回工作室處理。</p></div>
   </div>
   <div class="faq-item">
     <button class="faq-q">噴漆會影響搖桿手感或按鍵行程嗎？<span class="plus en">+</span></button>
@@ -380,8 +380,8 @@ footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
     <div class="faq-a"><p>可以，這屬於「特調色打樣」加購項目，我們會先調出樣品讓你確認色差後才正式噴塗，避免落差。</p></div>
   </div>
   <div class="faq-item">
-    <button class="faq-q">Switch Joy-Con 常見的搖桿漂移，噴漆能一起處理嗎？<span class="plus en">+</span></button>
-    <div class="faq-a"><p>可以，我們有提供「搖桿軸更換＋噴漆」方案，會先更換全新類比搖桿軸體解決漂移問題，再進行金屬桿改色。</p></div>
+    <button class="faq-q">維修過或二手的手把也可以送來改色嗎？<span class="plus en">+</span></button>
+    <div class="faq-a"><p>可以，我們會先檢查手把整體狀況（按鍵、搖桿、殼體結構）確認適合噴漆再開工；若外殼有明顯破損，會事先告知是否需要額外處理。</p></div>
   </div>
   <div class="faq-item">
     <button class="faq-q">工期大概多久？可以加急嗎？<span class="plus en">+</span></button>
@@ -398,7 +398,7 @@ footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
   <p>可以先透過表單留言，我們會盡快回覆你關心的細節。</p>
   <div class="hero-actions">
     <a class="btn-primary" href="order.html">前往預約表單</a>
-    <a class="btn-ghost" href="mailto:order@sticksmith.example.com">寄信詢問</a>
+    <a class="btn-ghost" href="pricing.html">查看價格方案</a>
   </div>
 </section>
 
@@ -421,12 +421,6 @@ footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
       <a href="pricing.html">Switch Joy-Con 噴漆</a>
       <a href="pricing.html">Switch Pro 手把噴漆</a>
       <a href="pricing.html">客製刻字</a>
-    </div>
-    <div>
-      <h5>聯絡方式</h5>
-      <p>Taipei, Taiwan</p>
-      <a href="mailto:order@sticksmith.example.com">order@sticksmith.example.com</a>
-      <a href="about.html#faq">LINE 官方帳號 →</a>
     </div>
   </div>
   <div class="foot-bottom">
@@ -572,35 +566,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
-
-  /* order form -> mailto handoff */
-  const orderForm = document.getElementById('orderForm');
-  if (orderForm) {
-    orderForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const fd = new FormData(orderForm);
-      const get = (k) => fd.get(k) || '（未填寫）';
-      const devices = fd.getAll('device').join('、') || '（未選擇）';
-      const body = [
-        `姓名：${get('name')}`,
-        `聯絡方式：${get('contact')}`,
-        `裝置類型：${devices}`,
-        `噴漆範圍：${get('scope')}`,
-        `選色：${get('color')}`,
-        `客製刻字：${get('engrave')}`,
-        `取件方式：${get('pickup')}`,
-        `備註：${get('notes')}`
-      ].join('%0D%0A');
-      const subject = encodeURIComponent('【客製訂單】STICKSMITH 手把噴漆預約');
-      window.location.href = `mailto:order@sticksmith.example.com?subject=${subject}&body=${body}`;
-      const toast = document.getElementById('toast');
-      if (toast) {
-        toast.textContent = '已為您開啟郵件軟體，請確認寄出以完成預約 →';
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 4000);
-      }
-    });
-  }
 
 });
 

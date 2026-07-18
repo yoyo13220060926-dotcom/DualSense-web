@@ -305,7 +305,7 @@ h1.headline .accent{background:linear-gradient(100deg, var(--steel-1), var(--blu
 .final .hero-actions{justify-content:center; margin-top:36px;}
 
 footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
-.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:30px; padding-bottom:30px;}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:30px; padding-bottom:30px;}
 @media(max-width:800px){.foot-grid{grid-template-columns:1fr 1fr;}}
 .foot-grid h5{font-size:11.5px; letter-spacing:.1em; color:var(--muted); margin-bottom:16px;}
 .foot-grid a, .foot-grid p{display:block; font-size:13px; color:var(--muted); text-decoration:none; margin-bottom:10px; line-height:1.6;}
@@ -363,16 +363,12 @@ footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
       <p>台北市（實際地址將於預約確認後提供）<br>營業時間：週二至週日 13:00–20:00</p>
     </div>
     <div class="block">
-      <h4>聯絡方式</h4>
-      <p><a href="mailto:order@sticksmith.example.com">order@sticksmith.example.com</a><br><a href="#">LINE 官方帳號</a></p>
-    </div>
-    <div class="block">
       <h4>下單前小提醒</h4>
       <p>建議先到<a href="gallery.html" style="color:var(--blue);">色彩選單</a>選定色號，並確認手把型號（PS5 標準版 / Edge、Switch Joy-Con / Pro）以加快報價速度。</p>
     </div>
     <div class="block">
       <h4>常見問題</h4>
-      <p>關於工期、保固、掉漆狀況等問題，可先參考<a href="about.html#faq" style="color:var(--blue);">FAQ 頁面</a>。</p>
+      <p>關於工期、掉漆狀況等問題，可先參考<a href="about.html#faq" style="color:var(--blue);">FAQ 頁面</a>。</p>
     </div>
   </aside>
 </section>
@@ -396,12 +392,6 @@ footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
       <a href="pricing.html">Switch Joy-Con 噴漆</a>
       <a href="pricing.html">Switch Pro 手把噴漆</a>
       <a href="pricing.html">客製刻字</a>
-    </div>
-    <div>
-      <h5>聯絡方式</h5>
-      <p>Taipei, Taiwan</p>
-      <a href="mailto:order@sticksmith.example.com">order@sticksmith.example.com</a>
-      <a href="about.html#faq">LINE 官方帳號 →</a>
     </div>
   </div>
   <div class="foot-bottom">
@@ -547,35 +537,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
-
-  /* order form -> mailto handoff */
-  const orderForm = document.getElementById('orderForm');
-  if (orderForm) {
-    orderForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const fd = new FormData(orderForm);
-      const get = (k) => fd.get(k) || '（未填寫）';
-      const devices = fd.getAll('device').join('、') || '（未選擇）';
-      const body = [
-        `姓名：${get('name')}`,
-        `聯絡方式：${get('contact')}`,
-        `裝置類型：${devices}`,
-        `噴漆範圍：${get('scope')}`,
-        `選色：${get('color')}`,
-        `客製刻字：${get('engrave')}`,
-        `取件方式：${get('pickup')}`,
-        `備註：${get('notes')}`
-      ].join('%0D%0A');
-      const subject = encodeURIComponent('【客製訂單】STICKSMITH 手把噴漆預約');
-      window.location.href = `mailto:order@sticksmith.example.com?subject=${subject}&body=${body}`;
-      const toast = document.getElementById('toast');
-      if (toast) {
-        toast.textContent = '已為您開啟郵件軟體，請確認寄出以完成預約 →';
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 4000);
-      }
-    });
-  }
 
 });
 

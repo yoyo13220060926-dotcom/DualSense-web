@@ -308,7 +308,7 @@ h1.headline .accent{background:linear-gradient(100deg, var(--steel-1), var(--blu
 .final .hero-actions{justify-content:center; margin-top:36px;}
 
 footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
-.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:30px; padding-bottom:30px;}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:30px; padding-bottom:30px;}
 @media(max-width:800px){.foot-grid{grid-template-columns:1fr 1fr;}}
 .foot-grid h5{font-size:11.5px; letter-spacing:.1em; color:var(--muted); margin-bottom:16px;}
 .foot-grid a, .foot-grid p{display:block; font-size:13px; color:var(--muted); text-decoration:none; margin-bottom:10px; line-height:1.6;}
@@ -406,7 +406,7 @@ footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
 
 <section id="process" class="process">
   <div class="steps reveal">
-    <div class="step"><div class="num en">01</div><h3>拆解檢測</h3><p>完整拆機，檢查搖桿軸體與外殼結構，確認無漂移、無鬆動再進入下一步。</p></div>
+    <div class="step"><div class="num en">01</div><h3>拆解檢測</h3><p>完整拆機，檢查搖桿軸體與外殼結構，確認組裝狀況良好再進入下一步。</p></div>
     <div class="step"><div class="num en">02</div><h3>去脂打磨</h3><p>金屬桿表面去油、細砂處理，建立塗層附著力，避免日後掉漆脫色。</p></div>
     <div class="step"><div class="num en">03</div><h3>底漆封層</h3><p>噴上專用金屬底漆，統一發色基礎，讓後續色層呈色更準確、更飽和。</p></div>
     <div class="step"><div class="num en">04</div><h3>色漆手噴</h3><p>依選定色號手工噴塗，薄層多次疊加，避免流掛、確保顆粒細緻均勻。</p></div>
@@ -452,7 +452,6 @@ footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
       <div class="tag mono">STANDARD</div>
       <h4>官方公版配色</h4>
       <ul>
-        <li><span class="ic">–</span>固定 3–4 款出廠色，無法客製</li>
         <li><span class="ic">–</span>塗層為量產噴塗，色號無法指定</li>
         <li><span class="ic">–</span>不提供金屬桿單獨改色</li>
         <li><span class="ic">–</span>無法對照真實色卡選色</li>
@@ -523,12 +522,6 @@ footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
       <a href="pricing.html">Switch Joy-Con 噴漆</a>
       <a href="pricing.html">Switch Pro 手把噴漆</a>
       <a href="pricing.html">客製刻字</a>
-    </div>
-    <div>
-      <h5>聯絡方式</h5>
-      <p>Taipei, Taiwan</p>
-      <a href="mailto:order@sticksmith.example.com">order@sticksmith.example.com</a>
-      <a href="about.html#faq">LINE 官方帳號 →</a>
     </div>
   </div>
   <div class="foot-bottom">
@@ -674,35 +667,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
-
-  /* order form -> mailto handoff */
-  const orderForm = document.getElementById('orderForm');
-  if (orderForm) {
-    orderForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const fd = new FormData(orderForm);
-      const get = (k) => fd.get(k) || '（未填寫）';
-      const devices = fd.getAll('device').join('、') || '（未選擇）';
-      const body = [
-        `姓名：${get('name')}`,
-        `聯絡方式：${get('contact')}`,
-        `裝置類型：${devices}`,
-        `噴漆範圍：${get('scope')}`,
-        `選色：${get('color')}`,
-        `客製刻字：${get('engrave')}`,
-        `取件方式：${get('pickup')}`,
-        `備註：${get('notes')}`
-      ].join('%0D%0A');
-      const subject = encodeURIComponent('【客製訂單】STICKSMITH 手把噴漆預約');
-      window.location.href = `mailto:order@sticksmith.example.com?subject=${subject}&body=${body}`;
-      const toast = document.getElementById('toast');
-      if (toast) {
-        toast.textContent = '已為您開啟郵件軟體，請確認寄出以完成預約 →';
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 4000);
-      }
-    });
-  }
 
 });
 
