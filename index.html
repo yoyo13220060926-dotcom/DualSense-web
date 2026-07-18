@@ -20,9 +20,9 @@
   --panel:#15181b;
   --panel-2:#1c2024;
   --line: rgba(255,255,255,.08);
-  --steel-1:#d7dbdf;
-  --steel-2:#8a9096;
-  --steel-3:#4b5157;
+  --steel-1:#c9c4b5;
+  --steel-2:#a39e90;
+  --steel-3:#6d6963;
   --text:#eef1f3;
   --muted:#9aa2a8;
   --blue:#3f7dfb;
@@ -156,12 +156,10 @@ h1.headline .accent{background:linear-gradient(100deg, var(--steel-1), var(--blu
 @media(max-width:900px){.bench{grid-template-columns:1fr;}}
 .stage{position:relative; height:480px; border-radius:20px; border:1px solid var(--line); background:radial-gradient(ellipse at 50% 30%, #1a1e22, #0d0f11 75%); display:flex; align-items:center; justify-content:center; overflow:hidden;}
 .stage::before{content:""; position:absolute; inset:0; background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size:34px 34px; opacity:.25; mask-image:radial-gradient(circle at 50% 40%, #000 20%, transparent 72%);}
-.rig{position:relative; width:220px; height:340px;}
-.shell{position:absolute; left:50%; bottom:0; transform:translateX(-50%); width:210px; height:230px; border-radius:50% 50% 40% 40% / 60% 60% 30% 30%; background:linear-gradient(155deg, var(--steel-1), var(--steel-2) 45%, var(--steel-3)); box-shadow:inset 0 -18px 40px rgba(0,0,0,.45), inset 0 10px 18px rgba(255,255,255,.35), 0 30px 60px -20px rgba(0,0,0,.7); transition:filter .6s ease;}
-.led{position:absolute; left:50%; top:38px; transform:translateX(-50%); width:96px; height:5px; border-radius:4px; background:var(--blue); box-shadow:0 0 16px 4px var(--blue-glow); animation:pulse 2.4s ease-in-out infinite;}
-.rod{position:absolute; left:50%; top:-58px; transform:translateX(-50%); width:20px; height:70px; border-radius:6px; background:linear-gradient(90deg, #2a2d30, #7d838a 30%, #2a2d30 55%, #52565a 80%); transition:background 1s cubic-bezier(.4,0,.2,1), box-shadow .8s; z-index:3;}
-.cap{position:absolute; left:50%; top:-92px; transform:translateX(-50%); width:62px; height:62px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #2c2f32, #0c0d0e 70%); box-shadow:0 10px 26px rgba(0,0,0,.6), inset 0 0 0 3px rgba(255,255,255,.03); z-index:4;}
-.cap::after{content:""; position:absolute; inset:8px; border-radius:50%; background-image:repeating-conic-gradient(rgba(255,255,255,.06) 0deg 4deg, transparent 4deg 10deg);}
+.controller-svg{width:78%; max-width:360px; filter:drop-shadow(0 30px 46px rgba(0,0,0,.55));}
+#shellPath{transition:fill 1s cubic-bezier(.16,1,.3,1);}
+#ledBar{transition:fill 1s cubic-bezier(.16,1,.3,1); filter:drop-shadow(0 0 6px var(--blue-glow)); animation:pulse 2.4s ease-in-out infinite;}
+#ringL, #ringR{transition:stroke 1s cubic-bezier(.16,1,.3,1);}
 .spark{position:absolute; width:5px; height:5px; border-radius:50%; pointer-events:none; z-index:6; opacity:0;}
 .spark.go{animation:sparkfly .7s ease-out forwards;}
 @keyframes sparkfly{0%{opacity:1; transform:translate(0,0) scale(1);} 100%{opacity:0; transform:translate(var(--tx), var(--ty)) scale(.2);}}
@@ -374,25 +372,117 @@ footer{border-top:1px solid var(--line); padding:44px 6vw 34px;}
   <div class="stage reveal">
     <div class="stage-label mono">LIVE PREVIEW</div>
     <div class="stage-code mono">PANTONE <b id="codeLabel">STEEL — 8400C</b></div>
-    <div class="rig">
-      <div class="cap" id="cap"></div>
-      <div class="rod" id="rod"></div>
-      <div class="shell" id="shell">
-        <div class="led"></div>
-      </div>
-    </div>
+    <svg id="controllerSVG" viewBox="0 0 440 300" class="controller-svg">
+      <defs>
+        <linearGradient id="grad-steel" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#eef1f3"/>
+          <stop offset="28%" stop-color="#b9bfc4"/>
+          <stop offset="52%" stop-color="#7c8288"/>
+          <stop offset="76%" stop-color="#c4c9ce"/>
+          <stop offset="100%" stop-color="#9aa0a6"/>
+        </linearGradient>
+        <linearGradient id="grad-void" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#4a4d50"/>
+          <stop offset="28%" stop-color="#232527"/>
+          <stop offset="52%" stop-color="#0a0b0c"/>
+          <stop offset="76%" stop-color="#2f3134"/>
+          <stop offset="100%" stop-color="#16181a"/>
+        </linearGradient>
+        <linearGradient id="grad-volt" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#a9c4ff"/>
+          <stop offset="28%" stop-color="#3f7dfb"/>
+          <stop offset="52%" stop-color="#163f9e"/>
+          <stop offset="76%" stop-color="#6a97fc"/>
+          <stop offset="100%" stop-color="#274f8e"/>
+        </linearGradient>
+        <linearGradient id="grad-rose" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f6ddc4"/>
+          <stop offset="28%" stop-color="#dba876"/>
+          <stop offset="52%" stop-color="#96633c"/>
+          <stop offset="76%" stop-color="#e6bd91"/>
+          <stop offset="100%" stop-color="#a9744a"/>
+        </linearGradient>
+        <linearGradient id="grad-race" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f4a99b"/>
+          <stop offset="28%" stop-color="#d94f43"/>
+          <stop offset="52%" stop-color="#7a1f1a"/>
+          <stop offset="76%" stop-color="#e2685a"/>
+          <stop offset="100%" stop-color="#8f2921"/>
+        </linearGradient>
+        <linearGradient id="grad-aura" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#c3b0f6"/>
+          <stop offset="28%" stop-color="#7b5fd9"/>
+          <stop offset="52%" stop-color="#3a2769"/>
+          <stop offset="76%" stop-color="#9b82e8"/>
+          <stop offset="100%" stop-color="#4f3a8a"/>
+        </linearGradient>
+        <radialGradient id="grad-cap" cx="35%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="#3a3d40"/>
+          <stop offset="70%" stop-color="#0c0d0e"/>
+        </radialGradient>
+        <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/>
+          <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/>
+          <feComposite operator="over" in2="SourceGraphic"/>
+        </filter>
+      </defs>
+
+      <path id="shellPath" d="M110 58
+        C 70 58 46 84 44 122
+        C 42 168 58 218 92 258
+        C 108 278 132 286 142 266
+        C 154 244 158 208 160 172
+        L 280 172
+        C 282 208 286 244 298 266
+        C 308 286 332 278 348 258
+        C 382 218 398 168 396 122
+        C 394 84 370 58 330 58
+        C 314 34 282 20 220 20
+        C 158 20 126 34 110 58 Z"
+        fill="url(#grad-steel)" filter="url(#grain)" />
+
+      <rect x="160" y="46" width="120" height="46" rx="10" fill="rgba(0,0,0,.18)"/>
+      <rect id="ledBar" x="178" y="52" width="84" height="5" rx="2.5" fill="#3f7dfb"/>
+      <g id="speakerDots" fill="rgba(255,255,255,.35)">
+        <circle cx="200" cy="66" r="2"/><circle cx="208" cy="66" r="2"/><circle cx="216" cy="66" r="2"/>
+        <circle cx="224" cy="66" r="2"/><circle cx="232" cy="66" r="2"/><circle cx="240" cy="66" r="2"/>
+      </g>
+
+      <g id="dpad" fill="rgba(0,0,0,.55)">
+        <rect x="95" y="98" width="16" height="46" rx="4"/>
+        <rect x="80" y="113" width="46" height="16" rx="4"/>
+      </g>
+
+      <g id="faceButtons" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="2.4">
+        <circle cx="345" cy="98" r="11"/>
+        <circle cx="322" cy="121" r="11"/>
+        <circle cx="368" cy="121" r="11"/>
+        <circle cx="345" cy="144" r="11"/>
+      </g>
+
+      <g id="stickL">
+        <circle cx="130" cy="150" r="27" fill="rgba(0,0,0,.28)"/>
+        <circle id="ringL" cx="130" cy="150" r="27" fill="none" stroke="#3f7dfb" stroke-width="3" opacity=".9"/>
+        <circle cx="130" cy="150" r="20" fill="url(#grad-cap)"/>
+      </g>
+      <g id="stickR">
+        <circle cx="270" cy="180" r="27" fill="rgba(0,0,0,.28)"/>
+        <circle id="ringR" cx="270" cy="180" r="27" fill="none" stroke="#3f7dfb" stroke-width="3" opacity=".9"/>
+        <circle cx="270" cy="180" r="20" fill="url(#grad-cap)"/>
+      </g>
+    </svg>
   </div>
   <div class="bench-copy reveal">
     <div class="sec-tag">調色台 · LIVE PAINT BENCH</div>
     <h2 class="sec-title">選一支色號，<br>看塗層即時上身。</h2>
-    <p class="sec-desc">點選下方色卡，搖桿金屬桿會即時換上噴漆後的質感 —— 這正是到店後你會看到的實際效果，所見即所得。</p>
+    <p class="sec-desc">點選下方色卡，搖桿外殼與金屬桿飾環會即時換上噴漆後的質感 —— 這正是到店後你會看到的實際效果，所見即所得。</p>
     <div class="swatches" id="swatches">
-      <div class="swatch active" data-rod="linear-gradient(90deg,#2a2d30,#c7ccd1 30%,#2a2d30 55%,#8a9096 80%)" data-shell="none" data-name="鈦金灰" data-code="STEEL — 8400C" style="background:linear-gradient(160deg,#d7dbdf,#7d838a)"><span>鈦金灰</span></div>
-      <div class="swatch" data-rod="linear-gradient(90deg,#0c0d0e,#3a3d40 30%,#0c0d0e 55%,#232527 80%)" data-shell="hue-rotate(0deg) saturate(0) brightness(.55)" data-name="深空黑" data-code="VOID — 0100C" style="background:linear-gradient(160deg,#3a3d40,#0c0d0e)"><span>深空黑</span></div>
-      <div class="swatch" data-rod="linear-gradient(90deg,#153a8a,#4f7cfb 30%,#153a8a 55%,#7ea3fd 80%)" data-shell="hue-rotate(190deg) saturate(2.6) brightness(.9)" data-name="電光藍" data-code="VOLT — 2745C" style="background:linear-gradient(160deg,#4f7cfb,#153a8a)"><span>電光藍</span></div>
-      <div class="swatch" data-rod="linear-gradient(90deg,#7a4a2c,#d9a878 30%,#7a4a2c 55%,#c9967a 80%)" data-shell="sepia(.6) saturate(2) hue-rotate(-10deg) brightness(1.05)" data-name="玫瑰金" data-code="ROSE — 4675C" style="background:linear-gradient(160deg,#e0b28a,#8a5a3a)"><span>玫瑰金</span></div>
-      <div class="swatch" data-rod="linear-gradient(90deg,#6e1717,#e05a5a 30%,#6e1717 55%,#c23b3b 80%)" data-shell="hue-rotate(-15deg) saturate(2.6) brightness(.85)" data-name="競速紅" data-code="RACE — 1795C" style="background:linear-gradient(160deg,#e05a5a,#6e1717)"><span>競速紅</span></div>
-      <div class="swatch" data-rod="linear-gradient(90deg,#3a2769,#8f6fe0 30%,#3a2769 55%,#7b5fd9 80%)" data-shell="hue-rotate(220deg) saturate(2.2) brightness(.95)" data-name="極光紫" data-code="AURA — 2665C" style="background:linear-gradient(160deg,#8f6fe0,#3a2769)"><span>極光紫</span></div>
+      <div class="swatch active" data-fill="url(#grad-steel)" data-accent="#9aa0a6" data-code="STEEL — 8400C" style="background:linear-gradient(160deg,#eef1f3,#9aa0a6)"><span>鈦金灰</span></div>
+      <div class="swatch" data-fill="url(#grad-void)" data-accent="#4b5157" data-code="VOID — 0100C" style="background:linear-gradient(160deg,#4a4d50,#16181a)"><span>深空黑</span></div>
+      <div class="swatch" data-fill="url(#grad-volt)" data-accent="#3f7dfb" data-code="VOLT — 2745C" style="background:linear-gradient(160deg,#a9c4ff,#163f9e)"><span>電光藍</span></div>
+      <div class="swatch" data-fill="url(#grad-rose)" data-accent="#c9967a" data-code="ROSE — 4675C" style="background:linear-gradient(160deg,#f6ddc4,#96633c)"><span>玫瑰金</span></div>
+      <div class="swatch" data-fill="url(#grad-race)" data-accent="#d94f43" data-code="RACE — 1795C" style="background:linear-gradient(160deg,#f4a99b,#7a1f1a)"><span>競速紅</span></div>
+      <div class="swatch" data-fill="url(#grad-aura)" data-accent="#7b5fd9" data-code="AURA — 2665C" style="background:linear-gradient(160deg,#c3b0f6,#3a2769)"><span>極光紫</span></div>
     </div>
     <div class="bench-note">＊實際色差依環境光源與螢幕校色略有不同，到店可對照真實色卡確認。完整 18 色請見<a href="gallery.html" style="color:var(--blue);">色彩選單</a>。</div>
   </div>
@@ -567,8 +657,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* paint bench interactivity */
-  const rod = document.getElementById('rod');
-  const shell = document.getElementById('shell');
+  const shellPath = document.getElementById('shellPath');
+  const ledBar = document.getElementById('ledBar');
+  const ringL = document.getElementById('ringL');
+  const ringR = document.getElementById('ringR');
   const codeLabel = document.getElementById('codeLabel');
   const stage = document.querySelector('.stage');
   const swatches = document.querySelectorAll('#swatches .swatch');
@@ -596,8 +688,10 @@ document.addEventListener('DOMContentLoaded', () => {
     sw.addEventListener('click', () => {
       swatches.forEach(s => s.classList.remove('active'));
       sw.classList.add('active');
-      if (rod) rod.style.background = sw.dataset.rod;
-      if (shell) shell.style.filter = sw.dataset.shell === 'none' ? '' : sw.dataset.shell;
+      if (shellPath) shellPath.setAttribute('fill', sw.dataset.fill);
+      if (ledBar) ledBar.setAttribute('fill', sw.dataset.accent);
+      if (ringL) ringL.setAttribute('stroke', sw.dataset.accent);
+      if (ringR) ringR.setAttribute('stroke', sw.dataset.accent);
       if (codeLabel) codeLabel.textContent = sw.dataset.code;
       burst();
     });
